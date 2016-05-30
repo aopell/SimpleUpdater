@@ -35,16 +35,20 @@ namespace SimpleUpdater
 
                 wc.DownloadProgressChanged += wc_DownloadProgressChanged;
                 temp = Path.GetTempFileName();
-                wc.DownloadFile(downloadUrl, temp);
+                wc.DownloadFileAsync(new Uri(downloadUrl), temp);
+                label3.Text = "Download in progress";
             }
             catch
             {
+                label3.Text = "Download failed";
                 System.Windows.Forms.MessageBox.Show("The update failed. Please try again later.", "Update Failed", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
 
         void wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            label3.Text = "Download completed";
+            File.Delete(args[1]);
             File.Move(temp, args[1]);
             Process.Start(args[1]);
             Application.Exit();
