@@ -10,5 +10,9 @@ Open the file with two arguments, `DownloadLink` and `SaveLocation`
 
 C#:
 ```C#
-System.Net.WebClient.DownloadFile("http://example.com/Binary.exe","C:\\Users\User\Downloads\Binary.exe");
+System.Net.WebClient.DownloadFile("https://github.com/aopell/SimpleUpdater/releases/download/v1.1/SimpleUpdater.exe", System.IO.Path.GetTempPath() + "\\SimpleUpdater.exe");
+System.Diagnostics.Process.Start(System.IO.Path.GetTempPath() + "\\SimpleUpdater.exe", "http://example.com/MyProgramBinary.exe <Your Application's Path Here>");
+Application.Exit();
 ```
+
+SimpleUpdater will automatically download your new version, replace your old version, and launch your newly updated program
